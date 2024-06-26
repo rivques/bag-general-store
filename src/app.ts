@@ -28,7 +28,6 @@ let bagApp: BagApp;
 })();
 
 const scheduler = new Scheduler(slackApp.client);
-scheduler.loadAll("data/jobs.json", "data/prices.json");
 setInterval(async () => {
   await scheduler.saveAll("data/jobs.json", "data/prices.json");
 }, 30000);
@@ -80,6 +79,8 @@ slackApp.view('sell-modal-submit', async ({ ack, body, client }) => {
 
 console.log(`Starting app...`);
 (async () => {
+  console.log(`Loading from files...`)
+  scheduler.loadAll("data/jobs.json", "data/prices.json");
   console.log(`Launching slackbot...`)
   await slackApp.start();
   console.log('⚡️ Bolt app is running!');
