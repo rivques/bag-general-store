@@ -80,7 +80,7 @@ slackApp.view('sell-modal-submit', async ({ ack, body, client }) => {
 console.log(`Starting app...`);
 (async () => {
   console.log(`Loading from files...`)
-  scheduler.loadAll("data/jobs.json", "data/prices.json");
+  await scheduler.loadAll("data/jobs.json", "data/prices.json");
   console.log(`Launching slackbot...`)
   await slackApp.start();
   console.log('⚡️ Bolt app is running!');
