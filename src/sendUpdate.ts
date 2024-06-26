@@ -3,7 +3,7 @@ import { BuyOnlyRotatingItem, CoreItem, Item, PriceConglomerate, SellableRotatin
 import { Scheduler } from './scheduler';
 
 export default async function sendUpdate(client: WebClient, prices: PriceConglomerate, scheduler: Scheduler): Promise<void> {    
-    console.log(`Sending price update to Slack...`)    
+    console.log(`Sending price update to Slack...`)
     console.log(JSON.stringify(scheduler.jobs.map((job) => {return {state: job.state, date:  job.date, type:  job.updateType}}), null, 2))
     const nextPriceReroll = scheduler.jobs.filter((job) => job.state = "waiting").find((job) => job.updateType === 'price')?.date ?? new Date(Date.now() + 300000);
     const nextItemReroll = new Date(Date.now() + 24*3600*1000);
@@ -53,7 +53,7 @@ export default async function sendUpdate(client: WebClient, prices: PriceConglom
                 type: "section",
                 text: {
                     type: "mrkdwn",
-                    text: `*Core Items*\n${prices.coreItems.map((item: CoreItem) => `• :${item.tag}: ${item.name}: :gs-buy: ${item.sellToPlayerPrice} :-gp: | :gs-sell: ${item.buyFromPlayerPrice} :-gp:`).join('\n')}`
+                    text: `*Core Items*\n${prices.coreItems.map((item: CoreItem) => `• :${item.tag}: ${item.name}: :gs-buy: ${item.sellToPlayerPrice} | :gs-sell: ${item.buyFromPlayerPrice} :-gp:`).join('\n')}`
                 }
             },
             {
