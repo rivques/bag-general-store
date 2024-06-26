@@ -1,2 +1,6 @@
 .env
 node_modules
+
+# track the data folder, but nothing inside it
+data/*
+!data/.gitkeep
