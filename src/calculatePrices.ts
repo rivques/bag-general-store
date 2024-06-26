@@ -54,6 +54,9 @@ export async function rerollItems(): Promise<PriceConglomerate> {
     // then, calculate the prices for each item, with variance
     // then, return the conglomerate
     const coreItems = yamlItems.filter((item: YamlItem) => process.env.CORE_ITEMS!.split(',').includes(item.name));
+    console.log(`Core items env var: ${process.env.CORE_ITEMS}`)
+    console.log(`found number of items: ${coreItems.length}`)
+    console.log(`found items: ${coreItems.map((item: YamlItem) => item.name)}`)
     const midItems = yamlItems.filter((item: YamlItem) => item.intended_value_gp >= Number(process.env.MID_FLOOR) && item.intended_value_gp <= Number(process.env.MID_CEILING));
     const highItems = yamlItems.filter((item: YamlItem) => item.intended_value_gp >= Number(process.env.MID_FLOOR));
     const numSellableRotating = Number(process.env.NUM_SELLABLE_ROTATING);
