@@ -1,6 +1,7 @@
 import { WebClient } from '@slack/web-api';
 import { BuyOnlyRotatingItem, CoreItem, Item, PriceConglomerate, SellableRotatingItem } from './types';
 import { Scheduler } from './scheduler';
+import {MessageElement} from '@slack/web-api/dist/response/ConversationsHistoryResponse';
 
 export default async function sendUpdate(client: WebClient, prices: PriceConglomerate, scheduler: Scheduler): Promise<void> {    
     console.log(`Sending price update to Slack...`)
@@ -21,11 +22,26 @@ export default async function sendUpdate(client: WebClient, prices: PriceConglom
     });
     if(messages.messages) {
         messages.messages.forEach(async (message: any) => {
-            if(message.user === process.env.SLACK_BOT_USER_ID) {
+            if(message.user === process.env.SLACK_BOT_USER_ID && (!message.text?.includes('These are yesterday\'s prices'))) {
                 try {
-                    await client.chat.delete({
+                    if(!message.ts) {
+                        console.error('No ts found for message: ');
+                        console.error(message);
+                        return;
+                    }
+                    await client.chat.update({
                         channel: process.env.GENSTORE_CHANNEL!,
                         ts: message.ts,
+                        text: 'These are yesterday\'s prices. Please check the most recent message for the latest prices.' + (message.text ? `\n${message.text}` : ''),
+                        blocks: [
+                            {
+                                type: "section",
+                                text: {
+                                    type: "mrkdwn",
+                                    text: '*These are yesterday\'s prices. Please check the most recent message for the latest prices.*'
+                                }
+                            }
+                        ].concat(message.blocks.slice(0,-1))
                     });
                 } catch (error) {
                     console.error(error);
