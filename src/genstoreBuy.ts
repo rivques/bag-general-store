@@ -117,7 +117,7 @@ export async function handleBuyModalSubmit(client: WebClient, body: SlackViewAct
         });
         return;
     }
-    const totalPrice = itemToBuy.buyFromPlayerPrice * Number(quantity);
+    const totalPrice = itemToBuy.sellToPlayerPrice * Number(quantity);
     console.log(`User ${body.user.id} wants to buy ${quantity} ${itemName} for ${totalPrice} :-gp:`)
     const userInventory = await bagApp.getInventory({
         identityId: body.user.id,
