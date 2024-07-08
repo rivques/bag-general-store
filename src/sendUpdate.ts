@@ -59,7 +59,7 @@ export default async function sendUpdate(client: WebClient, prices: PriceConglom
                 type: "section",
                 text: {
                     type: "mrkdwn",
-                    text: "Welcome to the Bag General Store! Here's what I have for sale:"
+                    text: "Welcome to the Bag® General Store™. Here are our items. Please ask a Bag® Genereal Store™ employee for assistance if you need help with anything. Please note that Special Buys℠ and Special Sells℠, as well as prices, are subject to change without notice. Thank you for shopping at the Bag® General Store™. Have a Bag® day."
                 }
             },
             {
@@ -79,7 +79,7 @@ export default async function sendUpdate(client: WebClient, prices: PriceConglom
                 type: "section",
                 text: {
                     type: "mrkdwn",
-                    text: `*Today's Special Buys*\n${prices.sellableRotatingItems.map((item: SellableRotatingItem) => `• :${item.tag}: ${item.name}: :gs-buy: ${item.sellToPlayerPrice} :-gp:`).join('\n')}`
+                    text: `*Today's Special Buys℠*\n${prices.sellableRotatingItems.map((item: SellableRotatingItem) => `• :${item.tag}: ${item.name}: :gs-buy: ${item.sellToPlayerPrice} :-gp:`).join('\n')}`
                 }
             },
             {
@@ -89,7 +89,7 @@ export default async function sendUpdate(client: WebClient, prices: PriceConglom
                 type: "section",
                 text: {
                     type: "mrkdwn",
-                    text: `*Today's Special Sells*\n${prices.buyOnlyRotatingItems.map((item: BuyOnlyRotatingItem) => `• :${item.tag}: ${item.name}: :gs-sell: ${item.buyFromPlayerPrice} :-gp:`).join('\n')}`
+                    text: `*Today's Special Sells℠*\n${prices.buyOnlyRotatingItems.map((item: BuyOnlyRotatingItem) => `• :${item.tag}: ${item.name}: :gs-sell: ${item.buyFromPlayerPrice} :-gp:`).join('\n')}`
                 }
             },
             {
@@ -99,7 +99,7 @@ export default async function sendUpdate(client: WebClient, prices: PriceConglom
                 type: "section",
                 text: {
                     type: "mrkdwn",
-                    text: `Next item reroll at roughly <!date^${Math.round(nextItemReroll.getTime()/1000)}^{date_short_pretty}, {time}|${nextItemReroll.toLocaleTimeString()}>`
+                    text: `Courtesy alert: Next item reroll at roughly <!date^${Math.round(nextItemReroll.getTime()/1000)}^{date_short_pretty}, {time}|${nextItemReroll.toLocaleTimeString()}>`
                 }
             },
             {
