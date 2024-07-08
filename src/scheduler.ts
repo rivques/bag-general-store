@@ -206,6 +206,7 @@ export class Scheduler {
     }
 
     public scheduleItemReroll() {
+        return; // heroku restarts handle this for us just fine
         const date = new Date();
         date.setHours(23, 0, 0, 0);
         while (date.getTime() < Date.now()) {

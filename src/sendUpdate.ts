@@ -99,7 +99,7 @@ export default async function sendUpdate(client: WebClient, prices: PriceConglom
                 type: "section",
                 text: {
                     type: "mrkdwn",
-                    text: `Next item reroll: <!date^${Math.round(nextItemReroll.getTime()/1000)}^{date_short_pretty}, {time}|${nextItemReroll.toLocaleTimeString()}>`
+                    text: `Next item reroll at roughly <!date^${Math.round(nextItemReroll.getTime()/1000)}^{date_short_pretty}, {time}|${nextItemReroll.toLocaleTimeString()}>`
                 }
             },
             {
@@ -139,7 +139,7 @@ export default async function sendUpdate(client: WebClient, prices: PriceConglom
         for(const item of prices.buyOnlyRotatingItems) {
             pricesString += `• :${item.tag}: ${item.name}: :gs-sell: ${item.buyFromPlayerPrice} :-gp:\n`;
         }
-        pricesString += `Next item reroll: ${nextItemReroll.toLocaleTimeString()}`;
+        pricesString += `Next item reroll at roughly ${nextItemReroll.toLocaleTimeString()}`;
 
         const result = await client.chat.postMessage({
             channel: process.env.GENSTORE_CHANNEL,
