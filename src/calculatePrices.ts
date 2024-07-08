@@ -58,7 +58,7 @@ export async function rerollItems(): Promise<PriceConglomerate> {
     console.log(`found number of items: ${coreItems.length}`)
     console.log(`found items: ${coreItems.map((item: YamlItem) => item.name)}`)
     const midItems = yamlItems.filter((item: YamlItem) => item.intended_value_gp >= Number(process.env.MID_FLOOR) && item.intended_value_gp <= Number(process.env.MID_CEILING));
-    const highItems = yamlItems.filter((item: YamlItem) => item.intended_value_gp >= Number(process.env.MID_FLOOR));
+    const highItems = yamlItems.filter((item: YamlItem) => item.intended_value_gp >= Number(process.env.MID_CEILING));
     const numSellableRotating = Number(process.env.NUM_SELLABLE_ROTATING);
     const numBuyOnlyRotating = Number(process.env.NUM_BUYONLY_ROTATING);
 
@@ -87,8 +87,8 @@ export async function rerollItems(): Promise<PriceConglomerate> {
                 itemSaleStatus: 'core',
                 baseSellToPlayerPrice: item.genstore_sell_to_player_price,
                 baseBuyFromPlayerPrice: item.genstore_buy_from_player_price,
-                sellToPlayerPrice: Math.round(item.genstore_sell_to_player_price + Math.floor(Math.random() * item.genstore_price_variance * 2) - item.genstore_price_variance),
-                buyFromPlayerPrice: Math.round(item.genstore_buy_from_player_price + Math.floor(Math.random() * item.genstore_price_variance * 2) - item.genstore_price_variance)
+                sellToPlayerPrice: Math.round(item.genstore_sell_to_player_price * (1.0 + Math.random() * item.genstore_price_variance * 2 - item.genstore_price_variance)),
+                buyFromPlayerPrice: Math.round(item.genstore_buy_from_player_price * (1.0 + Math.random() * item.genstore_price_variance * 2 - item.genstore_price_variance))
             }
         }),
         sellableRotatingItems: sellableRotatingItems.map((item: YamlItem) => {
@@ -100,8 +100,8 @@ export async function rerollItems(): Promise<PriceConglomerate> {
                 itemSaleStatus: 'sellable-rotating',
                 baseSellToPlayerPrice: item.genstore_sell_to_player_price,
                 baseBuyFromPlayerPrice: item.genstore_buy_from_player_price,
-                sellToPlayerPrice: Math.round(item.genstore_sell_to_player_price + Math.floor(Math.random() * item.genstore_price_variance * 2) - item.genstore_price_variance),
-                buyFromPlayerPrice: Math.round(item.genstore_buy_from_player_price + Math.floor(Math.random() * item.genstore_price_variance * 2) - item.genstore_price_variance)
+                sellToPlayerPrice: Math.round(item.genstore_sell_to_player_price * (1.0 + Math.random() * item.genstore_price_variance * 2 - item.genstore_price_variance)),
+                buyFromPlayerPrice: Math.round(item.genstore_buy_from_player_price * (1.0 + Math.random() * item.genstore_price_variance * 2 - item.genstore_price_variance))
             }
         }),
         buyOnlyRotatingItems: buyOnlyRotatingItems.map((item: YamlItem) => {
@@ -111,7 +111,7 @@ export async function rerollItems(): Promise<PriceConglomerate> {
                 intendedValue: item.intended_value_gp,
                 variance: item.genstore_price_variance,
                 itemSaleStatus: 'buyonly-rotating',
-                buyFromPlayerPrice: Math.round(item.intended_value_gp + Math.floor(Math.random() * item.genstore_price_variance * 2) - item.genstore_price_variance)     // high-value items don't get the selling debuff
+                buyFromPlayerPrice: Math.round(item.intended_value_gp +  (1.0 + Math.random() * item.genstore_price_variance * 2 - item.genstore_price_variance))     // high-value items don't get the selling debuff
             }
         })
     }
