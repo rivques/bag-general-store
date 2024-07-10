@@ -59,7 +59,7 @@ export default async function sendUpdate(client: WebClient, prices: PriceConglom
                 type: "section",
                 text: {
                     type: "mrkdwn",
-                    text: "Welcome to the Bag® General Store™. Here are our items. Please ask a Bag® Genereal Store™ employee for assistance if you need help with anything. Please note that Special Buys℠ and Special Sells℠, as well as prices, are subject to change without notice. Thank you for shopping at the Bag® General Store™. Have a Bag® day.\n\nPSA: Bag® General Store™ would like to elucidate the following. The :gs-buy: price is the price when you, the customer, buy something from the General Store™. The :gs-sell: price is the price when you sell something to the General Store™. Thank you for your understanding. Have a Bag® day."
+                    text: "Welcome to the Bag® General Store™. Here are our items. Please note that the :gs-buy: price is what _you_ pay _us_, and the :gs-sell: price is what _we_ pay _you_. Please note that Special Buys℠ and Special Sells℠, as well as prices, are subject to change without notice. Thank you for shopping at the Bag® General Store™. _Have a Bag® day._"
                 }
             },
             {
